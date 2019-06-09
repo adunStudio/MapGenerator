@@ -40,9 +40,9 @@ end
 function love.draw()
 
     --GameManager:Draw()
+    DungeonManager:Draw()
 
     love.graphics.print("Current FPS: " .. tostring(love.timer.getFPS( )), 10, 10)
-    DungeonManager:Draw()
 
     local curTime = love.timer.getTime()
     if nextTime <= curTime then

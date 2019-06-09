@@ -45,25 +45,27 @@ function PathTile.GetAdjacentPath(self, min, max, currentTiles)
     local pathTiles = {}
 
     local key_up = self.x .. ":" .. (self.y - 1)
-    if self.y - 1 >= min and currentTiles[key_up] == nil and currentTiles[key_up] ~= TileType.ESSENTIAL then
+    if self.y - 1 >= min and currentTiles[key_up] == nil then
         --pathTiles[key_up] = {x = self.x, y = self.y - 1}
         table.insert(pathTiles, {x = self.x, y = self.y - 1})
     end
 
     local key_down = self.x .. ":" .. (self.y + 1)
-    if self.y + 1 < max and currentTiles[key_down] == nil and currentTiles[key_down] ~= TileType.ESSENTIAL then
+    if self.y + 1 < max and currentTiles[key_down] == nil  then
         --pathTiles[key_down] = {x = self.x, y = self.y + 1}
         table.insert(pathTiles, {x = self.x, y = self.y + 1})
     end
 
-    local key_left = (self.x - 1) .. ":" .. self.y
-    if self.x - 1 >= min and currentTiles[key_left] == nil and currentTiles[key_left] ~= TileType.ESSENTIAL then
-        --pathTiles[key_left] = {x = self.x - 1, y = self.y}
-        table.insert(pathTiles, {x = self.x - 1, y = self.y})
+    if self.type ~= TileType.ESSENTIAL then
+        local key_left = (self.x - 1) .. ":" .. self.y
+        if self.x - 1 >= min and currentTiles[key_left] == nil then
+            pathTiles[key_left] = {x = self.x - 1, y = self.y}
+            table.insert(pathTiles, {x = self.x - 1, y = self.y})
+        end
     end
 
     local key_right = (self.x + 1) .. ":" .. self.y
-    if self.x + 1 < max and currentTiles[key_right] == nil and currentTiles[key_right] ~= TileType.ESSENTIAL then
+    if self.x + 1 < max and currentTiles[key_right] == nil  then
         --pathTiles[key_right] = {x = self.x + 1, y = self.y}
         table.insert(pathTiles, {x = self.x + 1, y = self.y})
     end
