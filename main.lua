@@ -8,6 +8,8 @@ KEY_H = 0
 KEY_V = 0
 
 function love.load()
+    math.randomseed(os.time())
+
     love.window.setMode(64 * 16, 64 * 9)
 
     nextTime = love.timer.getTime()
@@ -20,22 +22,15 @@ function love.load()
     GameManager:InitGame()
 
     DungeonManager:StartDungeon()
-    
+
     local backgroundMusic = love.audio.newSource("Sound/background.wav", "stream")
     backgroundMusic:play()
-
-    c = PathTile(2, 2, TileType.EMPTY, 1, 0, 14, {})
-    a = c.adjacentPathTiles
-
-    for k in pairs(a) do
-        print(a[k].x, a[k].y)
-    end
 end
 
 function love.update(dt)
     nextTime = nextTime + FPS
 
-    GameManager:Update(dt)
+    --GameManager:Update(dt)
 
     KEY_H = 0
     KEY_V = 0
@@ -44,11 +39,10 @@ end
 
 function love.draw()
 
-    GameManager:Draw()
+    --GameManager:Draw()
 
     love.graphics.print("Current FPS: " .. tostring(love.timer.getFPS( )), 10, 10)
-
-    c:Draw()
+    DungeonManager:Draw()
 
     local curTime = love.timer.getTime()
     if nextTime <= curTime then

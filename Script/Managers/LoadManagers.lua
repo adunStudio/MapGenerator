@@ -17,7 +17,8 @@ function LoadManagers()
     SpriteManager:Initialize()
 
     DungeonManager = DungeonManager_:New{}
-    
+    --DungeonManager:StartDungeon()
+
     BoardManager = BoardManager_:New{}
 
     GameManager = GameManager_:New{}
